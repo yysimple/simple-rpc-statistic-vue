@@ -10,9 +10,8 @@ Vue.use(Router)
 export const constantRoutes = [
     {
         path: '/',
-        component: () => import('@/views/home'),
         name: 'home',
-        redirect:'/home'
+        component: () => import('@/views/home'),
     }
 ]
 
