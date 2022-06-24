@@ -29,63 +29,32 @@
         <a-layout-sider width="200" style="background: #fff">
           <a-menu
               mode="inline"
-              :default-selected-keys="[]"
-              :default-open-keys="[]"
               style="height: 100%"
+              :selected-keys="selectedKeys"
+              :default-open-keys="defaultOpenKeys"
+              :default-selected-keys="defaultSelectedKeys"
           >
-            <a-sub-menu key="sub1">
-<!--              <router-link to="/trace"/>-->
-              <span slot="title"><a-icon type="user"/>link trace</span>
-              <a-menu-item key="1">
-                trace search
-                <router-link to="/trace/traceSearch"/>
-              </a-menu-item>
-              <a-menu-item key="2">
-                trace view
-                <router-link to="/trace/traceView"/>
-              </a-menu-item>
-              <a-menu-item key="3">
-                option3
-              </a-menu-item>
-              <a-menu-item key="4">
-                option4
-              </a-menu-item>
-            </a-sub-menu>
-            <a-sub-menu key="sub2">
-<!--              <router-link to="/register"/>-->
-              <span slot="title"><a-icon type="laptop"/>register center</span>
-              <a-menu-item key="5">
-                app search
-                <router-link to="/register/appSearch"/>
-              </a-menu-item>
-              <a-menu-item key="6">
-                service search
-                <router-link to="/register/serviceSearch"/>
-              </a-menu-item>
-              <a-menu-item key="7">
-                option7
-              </a-menu-item>
-              <a-menu-item key="8">
-                option8
-              </a-menu-item>
-            </a-sub-menu>
-            <a-sub-menu key="sub3">
-              <span slot="title"><a-icon type="notification"/>subnav 3</span>
-              <a-menu-item key="9">
-                option9
-              </a-menu-item>
-              <a-menu-item key="10">
-                option10
-              </a-menu-item>
-              <a-menu-item key="11">
-                option11
-              </a-menu-item>
-              <a-menu-item key="12">
-                option12
-              </a-menu-item>
-            </a-sub-menu>
+            <template v-for="(item, index) in routers">
+              <a-sub-menu v-if="!item.hidden" :key="item.path" >
+                  <span slot="title">
+                    <a-icon :type="item.meta && item.meta.icon"/>
+                    {{item.meta && item.meta.title || item.name}}
+                  </span>
+                  <template v-if="item.children && item.children.length">
+                    <template v-for="(e, i) in item.children">
+                      <a-menu-item v-if="!e.hidden" :key="e.name" @click="handleTo(e)">
+                        <span>
+                          <a-icon :type="e.meta && e.meta.icon"/>
+                          {{e.meta && e.meta.title || e.name}}
+                        </span>
+                      </a-menu-item>
+                    </template>
+                  </template>
+              </a-sub-menu>
+            </template>
           </a-menu>
         </a-layout-sider>
+
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
           <router-view/>
         </a-layout-content>
@@ -96,6 +65,47 @@
     </a-layout-footer>
   </a-layout>
 </template>
+
+<script>
+export default {
+  name: 'home',
+  data() {
+    return {
+      defaultOpenKeys: [],
+      defaultSelectedKeys: [],
+      selectedKeys: [],
+    }
+  },
+  computed: {
+    routers() {
+      return this.$router.options.routes || []
+    },
+  },
+  watch: {
+    '$route': {
+      handler() {
+        const name = this.$route.name
+        this.selectedKeys = [name]
+      }
+    }
+  },
+  beforeMount() {
+    this.initDefaultKeys()
+  },
+  methods: {
+    handleTo(route) {
+      const name = this.$route.name
+      if(name === route.name) return
+      this.$router.push({name: route.name})
+    },
+    initDefaultKeys() {
+      const name = this.$route.name
+      this.selectedKeys = [name]
+      this.defaultSelectedKeys = [name]
+    },
+  }
+}
+</script>
 
 <style>
 #components-layout-demo-top-side .logo {

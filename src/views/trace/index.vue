@@ -1,7 +1,6 @@
 <template>
   <div id="trace">
     trace
-    <router-view />
   </div>
 </template>
 
