@@ -29,7 +29,7 @@ const resError = (status) => {
 
 // const baseURL = 'http://123.57.26.161:5210';
 // const baseURL = 'http://123.57.26.161:5200/api/';
-const baseURL = 'http://127.0.0.1:9527/api/';
+const baseURL = 'http://127.0.0.1:9999/';
 // const baseURL = 'http://127.0.0.1:5250';
 
 export const service = axios.create({
@@ -60,7 +60,7 @@ service.interceptors.response.use((response) => {
     const resData = response.data
     NProgress.done()
     if (response.data) {
-        if (resData.status < 200 || resData.status >= 300) {
+        if (resData.errorCode < 200 || resData.errorCode >= 300) {
             // 处理http错误，抛到业务代码
             const err = new Error(resData.status)
             err.code = resData.status
