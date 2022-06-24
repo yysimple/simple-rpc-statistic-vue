@@ -5,6 +5,9 @@ import 'nprogress/nprogress.css' // progress bar style
 
 NProgress.configure({showSpinner: false}) // NProgress Configuration
 
+import trace from './trace/trace'
+import register from './register/register'
+
 Vue.use(Router)
 
 export const constantRoutes = [
@@ -12,15 +15,18 @@ export const constantRoutes = [
         path: '/',
         name: 'home',
         component: () => import('@/views/home'),
+        children: [
+            trace,
+            register,
+        ]
     }
 ]
 
 const statisticRouters = () => new Router({
     routes: [
-        ...constantRoutes,
+        ...constantRoutes
     ]
 })
-
 
 const router = statisticRouters()
 

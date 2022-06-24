@@ -1,14 +1,15 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div id="trace">
+    trace
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  components: {}
+  name: "index"
 }
 </script>
 
+<style scoped>
+
+</style>
