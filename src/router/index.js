@@ -26,7 +26,7 @@ export const constantRoutes = [
         path: '/reg',
         name: 'homeRegister',
         redirect: { path: '/reg/register' },
-        meta: { title: '用户注册', icon: 'user' },
+        meta: { title: '注册中心', icon: 'user' },
         component: Home,
         children: [
             ...register,

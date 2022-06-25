@@ -2,7 +2,7 @@ const trace = [
     {
         path: 'trace',
         name: 'trace',
-        meta: { title: '追踪', icon: 'line-chart' },
+        meta: { title: '链路总揽', icon: 'line-chart' },
         hidden: false,
         component: () => import('@/views/trace/index'),
     },
