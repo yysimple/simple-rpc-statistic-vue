@@ -6,6 +6,6 @@ export const listApp = (appName) => {
 }
 
 export const listService = (serviceName) => {
-    const url = `registerCenter/listService?appName=` + serviceName
+    const url = `registerCenter/listService?serviceName=` + serviceName
     return service.post(url, serviceName)
 }

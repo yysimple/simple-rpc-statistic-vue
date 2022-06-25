@@ -1,6 +1,10 @@
 <template>
   <div>
-    <a-input-search class="search-input" placeholder="input search text" enter-button @search="onSearch"/>
+    <a-input-search
+        class="search-input"
+        placeholder="input search text"
+        enter-button
+        @search="onSearch"/>
     <a-table :data-source="data" :columns="columns"/>
   </div>
 
