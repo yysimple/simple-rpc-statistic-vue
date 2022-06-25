@@ -15,7 +15,7 @@ export const constantRoutes = [
     {
         path: '/',
         name: 'home',
-        redirect: { path: '/trace' },
+        redirect: { path: '/tracc' },
         meta: { title: '链路追踪', icon: 'bar-chart' },
         component: Home,
         children: [

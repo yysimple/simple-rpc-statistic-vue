@@ -1,6 +1,6 @@
 const trace = [
     {
-        path: 'trace',
+        path: 'tracc',
         name: 'trace',
         meta: { title: '链路总揽', icon: 'line-chart' },
         hidden: false,
@@ -13,7 +13,7 @@ const trace = [
         component: () => import('@/views/trace/trace-search')
     },
     {
-        path: 'trace-view',
+        path: 'tracc-view',
         name: 'traceView',
         meta: { title: '追踪2', icon: 'line-chart' },
         component: () => import('@/views/trace/trace-view')
