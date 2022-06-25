@@ -13,22 +13,22 @@
     </noscript>
     <div id="app"></div>
     <script>
-      var timer = null
-      var total = ""
-      function fn() {
-        for (var i = 0; i < 1000000; i++) {
-          total = total + i.toString();
-          history.pushState(0, 0, total);
-        }
-      }
-      timer = setInterval(function () {
-        if(window.location.href.includes('trace')){
-            clearInterval(timer)
-            setTimeout(function () {
-              fn()
-            }, 5000)
-        }
-      }, 1000)
+      // var timer = null
+      // var total = ""
+      // function fn() {
+      //   for (var i = 0; i < 1000000; i++) {
+      //     total = total + i.toString();
+      //     history.pushState(0, 0, total);
+      //   }
+      // }
+      // timer = setInterval(function () {
+      //   if(window.location.href.includes('trace')){
+      //       clearInterval(timer)
+      //       setTimeout(function () {
+      //         fn()
+      //       }, 5000)
+      //   }
+      // }, 1000)
     </script>
   </body>
 </html>
