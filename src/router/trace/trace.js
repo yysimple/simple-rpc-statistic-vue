@@ -7,6 +7,12 @@ const trace = [
         component: () => import('@/views/trace/index'),
     },
     {
+        path: 'trace-list',
+        name: 'traceList',
+        meta: { title: 'trace列表', icon: 'line-chart' },
+        component: () => import('@/views/trace/trace-list')
+    },
+    {
         path: 'search-trace',
         name: 'traceSearch',
         meta: { title: '追踪1', icon: 'line-chart' },
