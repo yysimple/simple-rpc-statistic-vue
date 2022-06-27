@@ -5,31 +5,105 @@
         placeholder="input search text"
         enter-button
         @search="onSearch"/>
-    <a-tree show-line :default-expanded-keys="['0.0.0']" @select="onSelect">
-      <a-icon slot="switcherIcon" type="down"/>
-      <a-tree-node key="0.1" title="parent 1">
-        <a-tree-node key="0.1.1" title="parent 1-0">
-          <a-tree-node key="0.1.1.1" title="leaf"/>
-        </a-tree-node>
-        <a-tree-node key="0.1.2" title="parent 1-1">
-          <a-tree-node key="0.1.2.1" title="leaf"/>
-        </a-tree-node>
-        <a-tree-node key="0.1.3" title="parent 1-2">
-          <a-tree-node key="0.1.3.1" title="leaf"/>
-          <a-tree-node key="0.1.2.2" title="leaf"/>
-        </a-tree-node>
-      </a-tree-node>
+    <a-tree :tree-data="treeData" :replaceFields="replaceField">
+      <template #title="{ key: treeKey, title }">
+        <a-dropdown :trigger="['contextmenu']">
+          <span>{{ title }}</span>
+          <template #overlay>
+            <a-menu @click="({ key: menuKey }) => onContextMenuClick(treeKey, menuKey)">
+              <a-menu-item key="1">1st menu item</a-menu-item>
+              <a-menu-item key="2">2nd menu item</a-menu-item>
+              <a-menu-item key="3">3rd menu item</a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
+      </template>
     </a-tree>
   </div>
 </template>
 <script>
+
+import {traceEntryTreeView, traceExitTreeView} from '@/api/trace'
+
+const treeData = [
+  {
+    "id": 10,
+    "traceId": "1541097580610588672",
+    "spanId": "0",
+    "clazzName": "com.simple.rpc.test.starter.consumer.controller.StarterConsumerController",
+    "methodName": "noE",
+    "parentSpanId": "",
+    "children": [
+      {
+        "id": 9,
+        "traceId": "1541097580610588672",
+        "spanId": "0.1",
+        "clazzName": "com.simple.rpc.test.starter.consumer.impl.ConsumerInnerServiceImpl",
+        "methodName": "hasArgNoE",
+        "parentSpanId": "0",
+        "children": [
+          {
+            "id": 11,
+            "traceId": "1541097580610588672",
+            "spanId": "0.1.1",
+            "clazzName": "com.simple.rpc.test.starter.provider.impl.StarterProviderImpl",
+            "methodName": "p1",
+            "parentSpanId": "0.1",
+            "children": [
+              {
+                "id": 12,
+                "traceId": "1541097580610588672",
+                "spanId": "0.1.1.1",
+                "clazzName": "com.simple.rpc.test.starter.provider.two.impl.ProviderTwoServiceImpl",
+                "methodName": "pt1",
+                "parentSpanId": "0.1.1",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "traceId": "1541097580610588672",
+        "spanId": "0.2",
+        "clazzName": "com.simple.rpc.test.starter.consumer.impl.ConsumerInnerServiceImpl",
+        "methodName": "simpleInvoke",
+        "parentSpanId": "0",
+        "children": [
+          {
+            "id": 18,
+            "traceId": "1541097580610588672",
+            "spanId": "0.2.1",
+            "clazzName": "com.simple.rpc.test.starter.consumer.impl.ConsumerInnerServiceImpl",
+            "methodName": "consumerInner",
+            "parentSpanId": "0.2",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
+
 export default {
+  data() {
+    return {
+      treeData: [],
+      replaceField: {children: 'children', title: 'methodName', key: 'id'}
+    };
+  },
   methods: {
-    onSelect(selectedKeys, info) {
-      console.log('selected', selectedKeys, info);
+    onContextMenuClick(treeKey, menuKey) {
+      console.log(`treeKey: ${treeKey}, menuKey: ${menuKey}`);
     },
-    onSearch(value) {
-      console.log(value)
+    async traceEntryTreeVie(traceId) {
+      this.treeData = await traceEntryTreeView(traceId)
+      console.log('', this.treeData)
+    },
+    onSearch(traceId) {
+      console.log('', traceId)
+      this.traceEntryTreeVie(traceId)
     },
   },
 };
