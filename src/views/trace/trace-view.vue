@@ -5,10 +5,10 @@
         placeholder="input search text"
         enter-button
         @search="onSearch"/>
-    <a-tree :tree-data="treeData" :replaceFields="replaceField">
-      <template #title="{ key: treeKey, title }">
+    <a-tree :tree-data="treeData" :fieldNames="replaceField">
+      <template #title="{ key: treeKey, methodName }">
         <a-dropdown :trigger="['contextmenu']">
-          <span>{{ title }}</span>
+          <span>{{ methodName }}</span>
           <template #overlay>
             <a-menu @click="({ key: menuKey }) => onContextMenuClick(treeKey, menuKey)">
               <a-menu-item key="1">1st menu item</a-menu-item>
@@ -89,7 +89,7 @@ const treeData = [
 export default {
   data() {
     return {
-      treeData: [],
+      treeData,
       replaceField: {children: 'children', title: 'methodName', key: 'id'}
     };
   },
