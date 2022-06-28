@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       treeData: [],
-      replaceField: {children: 'children', title: 'showTitle', key: 'idAndTraceId'}
+      replaceField: {children: 'children', title: 'showTitle', key: 'id'}
     };
   },
   methods: {
@@ -32,7 +32,7 @@ export default {
     },
     onSearch(traceId) {
       console.log('', traceId)
-      this.traceEntryTreeVie('1541097580610588672')
+      this.traceEntryTreeVie(traceId)
     },
     onSelect(selectedNodes) {
       console.log('Trigger Select', selectedNodes[0]);
