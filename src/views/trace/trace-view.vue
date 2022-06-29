@@ -11,7 +11,7 @@
             <template slot="title">
               <span>prompt text</span>
             </template>
-            <a-tree :tree-data="treeData" :replaceFields="replaceField" @select="onSelect"/>
+            <a-tree :tree-data="treeData" :replaceFields="replaceField" @select="onSelect" style="display: inline-block;"/>
           </a-tooltip>
       </div>
 <!--      <a-popover v-model="visible" title="Title" placement="right" trigger="click">-->
