@@ -7,12 +7,16 @@
         @search="onSearch"/>
     <template>
       <div id="components-a-tooltip-demo-placement">
-          <a-tooltip placement="right">
-            <template slot="title">
-              <span>prompt text</span>
-            </template>
-            <a-tree :tree-data="treeData" :replaceFields="replaceField" @select="onSelect" style="display: inline-block;"/>
-          </a-tooltip>
+            <a-tree :tree-data="treeData" :replaceFields="replaceField" @select="onSelect" style="display: inline-block;">
+              <template #title="{ methodName }">
+                <a-tooltip placement="right" trigger="click">
+                  <template slot="title">
+                    <span>{{ methodName }}</span>
+                  </template>
+                  <span>{{ methodName }}</span>
+                </a-tooltip>
+              </template>
+            </a-tree>
       </div>
 <!--      <a-popover v-model="visible" title="Title" placement="right" trigger="click">-->
 <!--        <a slot="content" @click="hide"></a>-->
