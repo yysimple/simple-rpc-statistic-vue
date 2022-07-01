@@ -90,6 +90,7 @@ export default {
 
 .obj-item {
   margin-bottom: 5px;
+  overflow: hidden;
   .item-key {
     float: left;
     background: rgba(253, 198, 20, .5)
