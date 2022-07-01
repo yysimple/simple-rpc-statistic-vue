@@ -14,3 +14,9 @@ export const traceExitTreeView = (traceId) => {
     const url = `simpleAgentLog/traceExitTreeView?traceId=` + traceId
     return service.get(url, traceId)
 }
+
+export const getSimpleAgentLog = (id) => {
+    const url = `simpleAgentLog/getSimpleAgentLog?id=` + id
+    return service.get(url, id)
+}
+

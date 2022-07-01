@@ -29,8 +29,8 @@ const resError = (status) => {
 
 // const baseURL = 'http://123.57.26.161:5210';
 // const baseURL = 'http://123.57.26.161:5200/api/';
-// const baseURL = 'http://127.0.0.1:9999/';
-const baseURL = 'http://101.34.151.230:9999/';
+const baseURL = 'http://127.0.0.1:9999/';
+// const baseURL = 'http://101.34.151.230:9999/';
 // const baseURL = 'http://127.0.0.1:5250';
 
 export const service = axios.create({
