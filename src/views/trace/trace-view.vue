@@ -9,23 +9,12 @@
       <div id="components-a-tooltip-demo-placement">
         <a-tree :tree-data="treeData" :replaceFields="replaceField" @select="onSelect" style="display: inline-block;">
           <template #title="{ showTitle, id }">
-            <a-tooltip class="class-a-tooltip" placement="right" trigger="click">
+            <a-tooltip class="class-a-tooltip" placement="bottom" trigger="click">
               <template slot="title">
-                <div><span>id: </span><span>{{ detailLog.id }}</span></div>
-                <div><span>traceId: </span><span>{{ detailLog.traceId }}</span></div>
-                <div><span>spanId: </span><span>{{ detailLog.spanId }}</span></div>
-                <div><span>parentSpanId: </span><span>{{ detailLog.parentSpanId }}</span></div>
-                <div><span>level: </span><span>{{ detailLog.level }}</span></div>
-                <div><span>entryTime: </span><span>{{ detailLog.entryTime }}</span></div>
-                <div><span>exitTime: </span><span>{{ detailLog.exitTime }}</span></div>
-                <div><span>appName: </span><span>{{ detailLog.appName }}</span></div>
-                <div><span>host: </span><span>{{ detailLog.host }}</span></div>
-                <div><span>clazzName: </span><span>{{ detailLog.clazzName }}</span></div>
-                <div><span>methodName: </span><span>{{ detailLog.methodName }}</span></div>
-                <div><span>requestInfo: </span><span>{{ detailLog.requestInfo }}</span></div>
-                <div><span>resultInfo: </span><span>{{ detailLog.resultInfo }}</span></div>
-                <div><span>exceptionInfo: </span><span>{{ detailLog.exceptionInfo }}</span></div>
-                <div><span>resultInfo: </span><span>{{ detailLog.resultInfo }}</span></div>
+                <div v-for="(value, key) in detailLog" :key="key" class="obj-item">
+                  <div class="item-key">{{ key }}：</div>
+                  <p class="item-value">{{ value }}</p>
+                </div>
               </template>
               <span>{{ showTitle }}</span>
             </a-tooltip>
@@ -86,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .search-input {
   width: 400px;
 }
@@ -99,6 +88,15 @@ export default {
   margin-bottom: 8px;
 }
 
+.obj-item {
+  margin-bottom: 5px;
+  .item-key {
+    float: left;
+    background: rgba(253, 198, 20, .5)
+  }
+  .item-value {
+  }
+}
 .class-a-tooltip {
   width: 600px;
 }
