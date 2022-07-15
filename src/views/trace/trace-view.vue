@@ -57,7 +57,7 @@ export default {
     },
     onSearch(traceId) {
       console.log('', traceId)
-      this.traceEntryTreeVie('1541097580610588672')
+      this.traceEntryTreeVie(traceId)
     },
     onSelect(selectedNodes) {
       let id = selectedNodes[0];
